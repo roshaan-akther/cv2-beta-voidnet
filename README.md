@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Voidnet Console
+
+Developer console for the Void ecosystem. Part of the Void SSO system with VoidAuth.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **SSO**: JWT-based authentication with VoidAuth (accounts.openvoidnet.com)
+- **Protected Routes**: Console routes require authentication
+- **Developer Enrollment**: Publisher/Buyer pages require developer enrollment (username)
 
-## Learn More
+## Adding New Pages
 
-To learn more about Next.js, take a look at the following resources:
+### 1. Create Page
+```bash
+app/console/[page-name]/page.tsx
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Add to Sidebar
+Edit `components/app-sidebar.tsx`:
+```typescript
+publisher: [
+  {
+    name: "Page Name",
+    url: "/console/page-name",
+    icon: <Icon />,
+  },
+],
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Add Protection (if needed)
+Edit `middleware.ts`:
+```typescript
+const developerRequiredPaths = ['/console/analytics', '/console/keys', '/console/page-name'];
+```
 
-## Deploy on Vercel
+## Navigation Sections
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Overview**: Console, Accounts, Documentation (no dev enrollment required)
+- **Publisher**: Analytics (requires dev enrollment)
+- **Buyer**: API Keys (requires dev enrollment)
+- **Footer**: Settings, Help
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Key Files
+
+- `middleware.ts` - Authentication and developer enrollment checks
+- `components/app-sidebar.tsx` - Sidebar navigation
+- `lib/jwt.ts` - JWT verification (matches VoidAuth)
+- `app/console/layout.tsx` - Console layout with sidebar
+
+## Environment Variables
+
+```env
+JWT_SECRET=shared-with-voidauth
+NEXT_PUBLIC_AUTH_URL=http://localhost:3020
+NEXT_PUBLIC_NET_URL=http://localhost:3000
+```
