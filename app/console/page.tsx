@@ -1,30 +1,48 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+"use client"
+
+import { useEffect, useState } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
+
+interface UserInfo {
+  display_name?: string | null;
+  username?: string | null;
+  email?: string;
+}
 
 export default function ConsolePage() {
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      try {
+        const response = await fetch('/api/auth/userinfo')
+        if (response.ok) {
+          const data = await response.json()
+          setUserInfo(data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch user info:', error)
+      }
+    }
+
+    fetchUserInfo()
+  }, [])
+
+  const displayName = userInfo?.display_name || userInfo?.username || userInfo?.email
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
-      <p className="text-muted-foreground">
-        Welcome to the Voidnet Console. Manage your interfaces, API keys, and monitor your usage.
-      </p>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Interfaces</CardTitle>
-            <CardDescription>Manage your AI interfaces</CardDescription>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>API Keys</CardTitle>
-            <CardDescription>Generate and manage API keys</CardDescription>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Usage</CardTitle>
-            <CardDescription>Monitor your API usage</CardDescription>
-          </CardHeader>
-        </Card>
+      <div>
+        <h1 className="text-2xl font-semibold">
+          {userInfo ? (
+            `Welcome, ${displayName}`
+          ) : (
+            <Skeleton className="h-8 w-48" />
+          )}
+        </h1>
+        <p className="text-muted-foreground mt-1">
+          Manage your Voidnet applications and settings.
+        </p>
       </div>
     </div>
   )

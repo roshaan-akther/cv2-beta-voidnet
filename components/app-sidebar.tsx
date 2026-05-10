@@ -9,6 +9,7 @@ import {
   User,
   FileText,
   BarChart,
+  Store,
 } from "lucide-react"
 
 import { NavProjects } from "@/components/nav-projects"
@@ -31,8 +32,13 @@ const data = {
       icon: <LayoutDashboard />,
     },
     {
+      name: "Marketplace",
+      url: "/marketplace",
+      icon: <Store />,
+    },
+    {
       name: "Accounts",
-      url: "/console/accounts",
+      url: process.env.NEXT_PUBLIC_AUTH_URL || "http://localhost:3020",
       icon: <User />,
     },
     {
