@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { instrumentSans } from "@/lib/fonts"
@@ -42,14 +44,18 @@ export function Header() {
             <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in to Account</Link>
           </Button>
         </nav>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
+        <div className="flex items-center gap-2 md:hidden">
+          <Button asChild size="sm">
+            <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in</Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
       {mobileMenuOpen && (
         <nav className="md:hidden px-4 py-4 flex flex-col gap-1 border-t bg-background animate-in fade-in slide-in-from-top-2 duration-200">
@@ -76,9 +82,6 @@ export function Header() {
           </Button>
           <Button variant="ghost" asChild className="justify-start h-12">
             <Link href="/about">About</Link>
-          </Button>
-          <Button asChild className="justify-start h-12">
-            <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in to Account</Link>
           </Button>
         </nav>
       )}
