@@ -2,34 +2,34 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { instrumentSans } from "@/lib/fonts"
+import { geistSans } from "@/lib/fonts"
 import { Menu } from "lucide-react"
 import { useState } from "react"
 
-export function Header() {
+export function Header({ isAuthenticated }: { isAuthenticated: boolean }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="w-full">
+    <header className="w-full fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl">
       <div className="px-4 py-2 flex items-center justify-between w-full">
         <Link href="/">
-          <h1 className="text-xl font-bold" style={{ fontFamily: instrumentSans.style.fontFamily }}>Voidnet</h1>
+          <h1 className="text-xl font-bold" style={{ fontFamily: geistSans.style.fontFamily }}>Voidnet</h1>
         </Link>
         <nav className="hidden md:flex items-center gap-2">
           <Button variant="ghost" asChild>
             <Link href="/">Home</Link>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href="/marketplace">Marketplace</Link>
+            <Link href={process.env.NEXT_PUBLIC_MARKETPLACE_URL || "/marketplace"}>Marketplace</Link>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href={process.env.NEXT_PUBLIC_VOIDDOCS_URL || "/docs"} target="_blank" rel="noopener noreferrer">Documentation</Link>
+            <Link href={process.env.NEXT_PUBLIC_DOCS_URL || "/docs"} target="_blank" rel="noopener noreferrer">Documentation</Link>
           </Button>
           <Button variant="ghost" asChild>
             <Link href="/learn">Learn voidnet</Link>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href={process.env.NEXT_PUBLIC_VOIDAI_URL || "/voidai"} target="_blank" rel="noopener noreferrer">VoidAI</Link>
+            <Link href={process.env.NEXT_PUBLIC_AI_URL || "/voidai"} target="_blank" rel="noopener noreferrer">VoidAI</Link>
           </Button>
           <Button variant="ghost" asChild>
             <Link href={process.env.NEXT_PUBLIC_STATUS_URL || "/status"} target="_blank" rel="noopener noreferrer">Status</Link>
@@ -40,14 +40,26 @@ export function Header() {
           <Button variant="ghost" asChild>
             <Link href="/about">About</Link>
           </Button>
-          <Button asChild>
-            <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in to Account</Link>
-          </Button>
+          {isAuthenticated ? (
+            <Button asChild>
+              <Link href="/console">Go to Console</Link>
+            </Button>
+          ) : (
+            <Button asChild>
+              <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in to Account</Link>
+            </Button>
+          )}
         </nav>
         <div className="flex items-center gap-2 md:hidden">
-          <Button asChild size="sm">
-            <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in</Link>
-          </Button>
+          {isAuthenticated ? (
+            <Button asChild size="sm">
+              <Link href="/console">Go to Console</Link>
+            </Button>
+          ) : (
+            <Button asChild size="sm">
+              <Link href={process.env.NEXT_PUBLIC_AUTH_URL || "/auth"}>Sign in</Link>
+            </Button>
+          )}
           <Button
             variant="ghost"
             size="icon"
@@ -63,16 +75,16 @@ export function Header() {
             <Link href="/">Home</Link>
           </Button>
           <Button variant="ghost" asChild className="justify-start h-12">
-            <Link href="/marketplace">Marketplace</Link>
+            <Link href={process.env.NEXT_PUBLIC_MARKETPLACE_URL || "/marketplace"}>Marketplace</Link>
           </Button>
           <Button variant="ghost" asChild className="justify-start h-12">
-            <Link href={process.env.NEXT_PUBLIC_VOIDDOCS_URL || "/docs"} target="_blank" rel="noopener noreferrer">Documentation</Link>
+            <Link href={process.env.NEXT_PUBLIC_DOCS_URL || "/docs"} target="_blank" rel="noopener noreferrer">Documentation</Link>
           </Button>
           <Button variant="ghost" asChild className="justify-start h-12">
             <Link href="/learn">Learn voidnet</Link>
           </Button>
           <Button variant="ghost" asChild className="justify-start h-12">
-            <Link href={process.env.NEXT_PUBLIC_VOIDAI_URL || "/voidai"} target="_blank" rel="noopener noreferrer">VoidAI</Link>
+            <Link href={process.env.NEXT_PUBLIC_AI_URL || "/voidai"} target="_blank" rel="noopener noreferrer">VoidAI</Link>
           </Button>
           <Button variant="ghost" asChild className="justify-start h-12">
             <Link href={process.env.NEXT_PUBLIC_STATUS_URL || "/status"} target="_blank" rel="noopener noreferrer">Status</Link>

@@ -6,7 +6,7 @@ import { pool } from './lib/db';
 export const runtime = 'nodejs';
 
 const protectedPaths = ['/console'];
-const developerRequiredPaths = ['/console/analytics', '/console/keys'];
+const developerRequiredPaths = ['/console/publish-apps', '/console/keys', '/console/domains'];
 
 const staticPaths = ['/_next/static', '/favicon.ico', '/favicons', '/marketplace'];
 
@@ -19,6 +19,34 @@ async function checkDeveloperEnrollment(userId: string): Promise<boolean> {
     return !!result.rows[0]?.username;
   } catch (error) {
     console.error('Developer enrollment check failed:', error);
+    return false;
+  }
+}
+
+async function checkSessionStatusInDatabase(sessionId: string): Promise<boolean> {
+  try {
+    const result = await pool.query(
+      'SELECT expires_at, revoked FROM browser_sessions WHERE id = $1',
+      [sessionId]
+    );
+
+    if (result.rows.length === 0) {
+      return false;
+    }
+
+    const session = result.rows[0];
+    
+    if (session.revoked) {
+      return false;
+    }
+
+    if (new Date(session.expires_at) < new Date()) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Session status check failed:', error);
     return false;
   }
 }
@@ -53,6 +81,15 @@ export async function middleware(request: NextRequest) {
   const payload = verifyToken<BrowserSessionPayload>(token);
 
   if (!payload || payload.typ !== 'browser') {
+    const authUrl = new URL(process.env.NEXT_PUBLIC_AUTH_URL || 'http://localhost:3020');
+    authUrl.pathname = '/login';
+    authUrl.searchParams.set('returnTo', `${process.env.NEXT_PUBLIC_NET_URL || 'http://localhost:3000'}${pathname}`);
+    return NextResponse.redirect(authUrl);
+  }
+
+  // Check session status in database
+  const sessionValid = await checkSessionStatusInDatabase(payload.sid);
+  if (!sessionValid) {
     const authUrl = new URL(process.env.NEXT_PUBLIC_AUTH_URL || 'http://localhost:3020');
     authUrl.pathname = '/login';
     authUrl.searchParams.set('returnTo', `${process.env.NEXT_PUBLIC_NET_URL || 'http://localhost:3000'}${pathname}`);

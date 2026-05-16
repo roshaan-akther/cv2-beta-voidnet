@@ -1,8 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/nonauth/header"
-import { instrumentSans } from "@/lib/fonts"
+import { helveticaNeue } from "@/lib/fonts"
 import { Bot, BarChart3, Lock, Plug, Cloud, Zap } from "lucide-react"
 
 interface App {
@@ -70,13 +71,27 @@ const mockApps: App[] = [
 ]
 
 export default function MarketplacePage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const response = await fetch('/api/auth/userinfo')
+        setIsAuthenticated(response.ok)
+      } catch (error) {
+        setIsAuthenticated(false)
+      }
+    }
+    checkAuth()
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold" style={{ fontFamily: instrumentSans.style.fontFamily }}>Voidnet Marketplace</h1>
+          <h1 className="text-3xl font-bold" style={{ fontFamily: helveticaNeue.style.fontFamily }}>Voidnet Marketplace</h1>
           <p className="text-muted-foreground mt-2">
             Discover and publish applications on Voidnet
           </p>

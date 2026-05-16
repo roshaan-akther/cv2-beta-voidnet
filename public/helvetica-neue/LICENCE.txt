@@ -1,0 +1,58 @@
+# END USER LICENSE AGREEMENT FOR HELVETICA NEUE FONTS
+
+This End User License Agreement ("Agreement") is a legal agreement between you ("Licensee" or "you") and Monotype Imaging Inc. ("Monotype") for the use of the Helvetica Neue font software ("Fonts"). By installing, copying, or otherwise using the Fonts, you agree to be bound by the terms of this Agreement. If you do not agree to the terms of this Agreement, do not install or use the Fonts.
+
+## 1. DEFINITIONS
+
+- "Fonts" means the Helvetica Neue font software provided under this Agreement.
+- "Computer" means a single computer, workstation, terminal, handheld device, or other electronic device.
+- "Licensed Units" means the number of Computers authorized for use as specified in your order confirmation.
+
+## 2. GRANT OF LICENSE
+
+Subject to the terms and conditions of this Agreement, Monotype grants you a non-exclusive, non-transferable license to use the Fonts solely for your personal or internal business purposes on the Licensed Units.
+
+## 3. PERMITTED USES
+
+- **Desktop Use**: You may install and use the Fonts on the Licensed Units for creating, editing, and printing documents.
+- **Applications**: You may embed the Fonts in software applications, provided the Fonts are not editable or redistributable by end users.
+- **Web Embedding**: If your license includes web rights, you may embed the Fonts in web pages using proper font loading techniques (e.g., @font-face). Web embedding is not permitted under standard desktop licenses.
+- **Display and Reproduction**: You may display and reproduce the Fonts in printed or digital form as part of your documents or applications.
+
+## 4. RESTRICTIONS
+
+You may not:
+- Redistribute, sell, lease, or sublicense the Fonts.
+- Modify, adapt, translate, reverse engineer, decompile, or disassemble the Fonts.
+- Embed the Fonts in documents for distribution (e.g., PDFs) without explicit permission.
+- Use the Fonts for illegal purposes.
+- Transfer the Fonts to any third party without Monotype's prior written consent.
+- Use the Fonts in any way that infringes Monotype's trademarks or copyrights.
+
+## 5. OWNERSHIP
+
+The Fonts are owned by Monotype and are protected by copyright, trademark, and other intellectual property laws. You acquire no ownership rights in the Fonts. Helvetica Neue is a trademark of Monotype Imaging Inc.
+
+## 6. WARRANTY
+
+The Fonts are provided "as is" without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement. Monotype does not warrant that the Fonts will meet your requirements or that their operation will be uninterrupted or error-free.
+
+## 7. LIMITATION OF LIABILITY
+
+In no event shall Monotype be liable for any damages, including but not limited to direct, indirect, special, incidental, or consequential damages arising out of the use or inability to use the Fonts, even if Monotype has been advised of the possibility of such damages.
+
+## 8. TERMINATION
+
+This Agreement is effective until terminated. You may terminate it at any time by destroying all copies of the Fonts. This Agreement will terminate automatically if you fail to comply with any term or condition. Upon termination, you must destroy all copies of the Fonts and cease all use.
+
+## 9. GOVERNING LAW
+
+This Agreement shall be governed by the laws of the State of Illinois, United States of America, without regard to its conflict of laws principles.
+
+## 10. MISCELLANEOUS
+
+- This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements.
+- If any provision of this Agreement is held invalid, the remainder shall continue in full force and effect.
+- This Agreement may not be amended except in writing signed by both parties.
+
+For the official End User License Agreement, please visit https://www.monotype.com/legal/eula or contact Monotype support at support@monotype.com.

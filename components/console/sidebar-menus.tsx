@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-export function NavProjects({
+export function SidebarMenus({
   projects,
   label,
 }: {

@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { verifyToken, BrowserSessionPayload } from '@/lib/jwt';
-import { HomeContent } from '@/components/home-content';
+import { HomePage } from '@/components/nonauth/home-page';
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -15,5 +15,7 @@ export default async function Home() {
     }
   }
 
-  return <HomeContent isAuthenticated={isAuthenticated} />;
+  return (
+    <HomePage isAuthenticated={isAuthenticated} />
+  );
 }

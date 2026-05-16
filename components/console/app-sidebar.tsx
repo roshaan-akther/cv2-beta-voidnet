@@ -10,9 +10,10 @@ import {
   FileText,
   BarChart,
   Store,
+  Globe,
 } from "lucide-react"
 
-import { NavProjects } from "@/components/nav-projects"
+import { SidebarMenus } from "@/components/console/sidebar-menus"
 import {
   Sidebar,
   SidebarContent,
@@ -23,6 +24,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { instrumentSans } from "@/lib/fonts"
 
 const data = {
   overview: [
@@ -42,6 +44,11 @@ const data = {
       icon: <User />,
     },
     {
+      name: "Domain Verification",
+      url: "/console/domains",
+      icon: <Globe />,
+    },
+    {
       name: "Documentation",
       url: "/console/docs",
       icon: <FileText />,
@@ -49,9 +56,9 @@ const data = {
   ],
   publisher: [
     {
-      name: "Analytics",
-      url: "/console/analytics",
-      icon: <BarChart />,
+      name: "Publish Apps",
+      url: "/console/publish-apps",
+      icon: <Store />,
     },
   ],
   buyer: [
@@ -77,19 +84,19 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar className="border-r-0" {...props}>
-      <SidebarHeader className="p-4 pt-3">
-        <h1 className="text-xl font-semibold mb-2" style={{ fontFamily: 'var(--font-instrument)' }}>
+    <Sidebar className="border-r-0 bg-background" {...props}>
+      <SidebarHeader className="p-4 pt-3 bg-background">
+        <h1 className="text-xl font-semibold mb-2" style={{ fontFamily: instrumentSans.style.fontFamily }}>
           <span className="font-bold">Voidnet</span>
           <span className="font-light ml-1">Console</span>
         </h1>
       </SidebarHeader>
-      <SidebarContent>
-        <NavProjects projects={data.overview} label="Overview" />
-        <NavProjects projects={data.publisher} label="Publisher" />
-        <NavProjects projects={data.buyer} label="Buyers" />
+      <SidebarContent className="bg-background">
+        <SidebarMenus projects={data.overview} label="Overview" />
+        <SidebarMenus projects={data.publisher} label="Publisher" />
+        <SidebarMenus projects={data.buyer} label="Buyers" />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="bg-background">
         <SidebarMenu className="gap-0">
           {data.footer.map((item) => (
             <SidebarMenuItem key={item.title}>
