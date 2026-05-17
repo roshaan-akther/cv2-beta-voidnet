@@ -3,8 +3,6 @@ import type { NextRequest } from 'next/server';
 import { verifyToken, BrowserSessionPayload } from './lib/jwt';
 import { pool } from './lib/db';
 
-export const runtime = 'nodejs';
-
 const protectedPaths = ['/console'];
 const developerRequiredPaths = ['/console/publish-apps', '/console/keys', '/console/domains'];
 
@@ -51,7 +49,7 @@ async function checkSessionStatusInDatabase(sessionId: string): Promise<boolean>
   }
 }
 
-export async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Redirect /dashboard to /console
