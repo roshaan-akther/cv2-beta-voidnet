@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { geistSans } from "@/lib/fonts"
+import { instrumentSans, geistSans } from "@/lib/fonts"
 import { Menu } from "lucide-react"
 import { useState } from "react"
 
@@ -13,9 +13,9 @@ export function Header({ isAuthenticated }: { isAuthenticated: boolean }) {
     <header className="w-full fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl">
       <div className="px-4 py-2 flex items-center justify-between w-full">
         <Link href="/">
-          <h1 className="text-xl font-bold" style={{ fontFamily: geistSans.style.fontFamily }}>Voidnet</h1>
+          <h1 className="text-xl font-bold" style={{ fontFamily: instrumentSans.style.fontFamily }}>Voidnet</h1>
         </Link>
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-2" style={{ fontFamily: geistSans.style.fontFamily }}>
           <Button variant="ghost" asChild>
             <Link href="/">Home</Link>
           </Button>
@@ -70,7 +70,7 @@ export function Header({ isAuthenticated }: { isAuthenticated: boolean }) {
         </div>
       </div>
       {mobileMenuOpen && (
-        <nav className="md:hidden px-4 py-4 flex flex-col gap-1 border-t bg-background animate-in fade-in slide-in-from-top-2 duration-200">
+        <nav className="md:hidden px-4 py-4 flex flex-col gap-1 border-t bg-background animate-in fade-in slide-in-from-top-2 duration-200" style={{ fontFamily: geistSans.style.fontFamily }}>
           <Button variant="ghost" asChild className="justify-start h-12">
             <Link href="/">Home</Link>
           </Button>

@@ -209,6 +209,72 @@ export function HomePage({ isAuthenticated }: { isAuthenticated: boolean }) {
             </div>
           </div>
         </section>
+
+        {/* Contact & Feedback Section */}
+        <section className="py-16 sm:py-24">
+          <div className="mx-auto max-w-[1728px] px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-[1.1] mb-4 text-center">
+                Get in touch
+              </h2>
+              <p className="text-base sm:text-lg text-muted-foreground text-center">
+                Have questions or feedback? We'd love to hear from you.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Contact - Left */}
+              <Link href="/contact" className="group">
+                <div className="h-full rounded-lg overflow-hidden">
+                  <div className="aspect-video w-full overflow-hidden bg-muted rounded-lg">
+                    <Image
+                      src="/assets/contact-blur.jpg"
+                      alt="Contact us"
+                      width={400}
+                      height={225}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300 rounded-lg"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-medium mb-2">Contact Us</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Connect directly with our team for conversations and support.
+                    </p>
+                    <div className="flex items-center text-primary group-hover:gap-2 transition-all">
+                      <span>Go to contact form</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Feedback - Right */}
+              <Link href="/feedback" className="group">
+                <div className="h-full rounded-lg overflow-hidden">
+                  <div className="aspect-video w-full overflow-hidden bg-muted rounded-lg">
+                    <Image
+                      src="/assets/feedback-blur.jpg"
+                      alt="Send feedback"
+                      width={400}
+                      height={225}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300 rounded-lg"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-medium mb-2">Send Feedback</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Share your thoughts, report bugs, or suggest features to help us improve.
+                    </p>
+                    <div className="flex items-center text-primary group-hover:gap-2 transition-all">
+                      <span>Go to feedback form</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

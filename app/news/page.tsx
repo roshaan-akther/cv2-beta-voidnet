@@ -36,7 +36,7 @@ export default function NewsPage() {
         <div className="mx-auto max-w-[1728px] px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <h1 className="text-3xl sm:text-4xl font-medium tracking-tight mb-12">Newsroom</h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {allNews.map((newsItem) => (
               <Link 
                 key={newsItem.slug} 

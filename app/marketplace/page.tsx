@@ -4,71 +4,103 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/nonauth/header"
 import { helveticaNeue } from "@/lib/fonts"
-import { Bot, BarChart3, Lock, Plug, Cloud, Zap } from "lucide-react"
+import { Bot, BarChart3, Lock, Plug, Cloud, Zap, Code, Database, Shield } from "lucide-react"
 
 interface App {
   id: string
   name: string
-  subtitle: string
-  icon: any
+  description: string
+  category: string
+  icon: string
+  featured: boolean
 }
 
-const mockApps: App[] = [
+const appsData: App[] = [
   {
-    id: "1",
+    id: "ai-assistant-pro",
     name: "AI Assistant Pro",
-    subtitle: "Automate your workflow with AI-powered assistant",
-    icon: Bot
+    description: "Automate your workflow with AI-powered assistant",
+    category: "Productivity",
+    icon: "Bot",
+    featured: true
   },
   {
-    id: "2",
+    id: "data-analytics-dashboard",
     name: "Data Analytics Dashboard",
-    subtitle: "Real-time analytics and visualization",
-    icon: BarChart3
+    description: "Real-time analytics and visualization",
+    category: "Analytics",
+    icon: "BarChart3",
+    featured: true
   },
   {
-    id: "3",
+    id: "secure-vault",
     name: "Secure Vault",
-    subtitle: "Military-grade encryption for teams",
-    icon: Lock
+    description: "Military-grade encryption for teams",
+    category: "Security",
+    icon: "Lock",
+    featured: true
   },
   {
-    id: "4",
+    id: "api-gateway-manager",
     name: "API Gateway Manager",
-    subtitle: "Real-time logs and analytics included",
-    icon: Plug
+    description: "Real-time logs and analytics included",
+    category: "Developer Tools",
+    icon: "Plug",
+    featured: false
   },
   {
-    id: "5",
+    id: "cloud-storage-sync",
     name: "Cloud Storage Sync",
-    subtitle: "Automatic backup across all devices",
-    icon: Cloud
+    description: "Automatic backup across all devices",
+    category: "Storage",
+    icon: "Cloud",
+    featured: false
   },
   {
-    id: "6",
+    id: "task-automation",
     name: "Task Automation",
-    subtitle: "Smart automation for repetitive tasks",
-    icon: Zap
+    description: "Smart automation for repetitive tasks",
+    category: "Productivity",
+    icon: "Zap",
+    featured: false
   },
   {
-    id: "7",
+    id: "code-editor-pro",
     name: "Code Editor Pro",
-    subtitle: "Advanced IDE with AI completions",
-    icon: Bot
+    description: "Advanced IDE with AI completions",
+    category: "Developer Tools",
+    icon: "Code",
+    featured: false
   },
   {
-    id: "8",
+    id: "database-manager",
     name: "Database Manager",
-    subtitle: "Manage databases with ease",
-    icon: BarChart3
+    description: "Manage databases with ease",
+    category: "Developer Tools",
+    icon: "Database",
+    featured: false
   },
   {
-    id: "9",
+    id: "security-scanner",
     name: "Security Scanner",
-    subtitle: "Scan for vulnerabilities automatically",
-    icon: Lock
+    description: "Scan for vulnerabilities automatically",
+    category: "Security",
+    icon: "Shield",
+    featured: false
   }
 ]
+
+const iconMap: Record<string, any> = {
+  Bot,
+  BarChart3,
+  Lock,
+  Plug,
+  Cloud,
+  Zap,
+  Code,
+  Database,
+  Shield
+}
 
 export default function MarketplacePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -89,7 +121,7 @@ export default function MarketplacePage() {
     <div className="flex flex-col min-h-screen">
       <Header isAuthenticated={isAuthenticated} />
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 pt-24 pb-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold" style={{ fontFamily: helveticaNeue.style.fontFamily }}>Voidnet Marketplace</h1>
           <p className="text-muted-foreground mt-2">
@@ -98,31 +130,34 @@ export default function MarketplacePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {mockApps.map((app) => (
-            <div
-              key={app.id}
-              className="flex items-center gap-3 p-3 rounded-xl hover:bg-accent/50 transition-colors cursor-pointer"
-            >
-              {/* Left: Icon */}
-              <div className="w-12 h-12 sm:w-12 sm:h-12 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
-                <app.icon className="w-6 h-6" />
-              </div>
-              
-              {/* Middle: Title and Subtitle */}
-              <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-xs sm:text-xs md:text-xs">{app.name}</h3>
-                <p className="text-[10px] sm:text-[10px] md:text-[10px] text-muted-foreground truncate">{app.subtitle}</p>
-              </div>
-
-              {/* Right: View Button */}
-              <Button
-                size="sm"
-                className="rounded-full px-3 sm:px-4 text-[10px] font-medium h-7 flex-shrink-0 bg-blue-900/30 hover:bg-blue-900/50 text-blue-900 dark:text-blue-200 backdrop-blur-sm"
+          {appsData.map((app) => {
+            const IconComponent = iconMap[app.icon] || Bot
+            return (
+              <div
+                key={app.id}
+                className="flex items-end gap-3 p-4 rounded-xl hover:bg-accent/50 transition-colors cursor-pointer min-h-[120px]"
               >
-                View
-              </Button>
-            </div>
-          ))}
+                {/* Left: Icon */}
+                <div className="w-12 h-12 sm:w-12 sm:h-12 md:w-12 md:h-12 rounded-xl bg-muted flex items-center justify-center flex-shrink-0">
+                  <IconComponent className="w-6 h-6" />
+                </div>
+
+                {/* Middle: Title and Subtitle */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-base sm:text-base md:text-base">{app.name}</h3>
+                  <p className="text-sm sm:text-sm md:text-sm text-muted-foreground line-clamp-2">{app.description}</p>
+                </div>
+
+                {/* Right: View Button */}
+                <Button
+                  size="sm"
+                  className="rounded-full px-3 sm:px-4 text-[10px] font-medium h-7 flex-shrink-0 bg-blue-900/30 hover:bg-blue-900/50 text-blue-900 dark:text-blue-200 backdrop-blur-sm"
+                >
+                  View
+                </Button>
+              </div>
+            )
+          })}
         </div>
       </main>
     </div>
