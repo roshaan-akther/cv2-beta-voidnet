@@ -13,7 +13,8 @@ export function MessageBar({ onMessage, isGenerating, onStopGeneration }: { onMe
 
   const handleSend = () => {
     if (message.trim()) {
-      onMessage(message)
+      const query = encodeURIComponent(message.trim())
+      window.open(`https://chat.openvoidnet.com/thread?c=${query}`, '_blank')
       setMessage("")
       setIsExpanded(false)
     }
