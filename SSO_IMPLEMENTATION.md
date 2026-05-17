@@ -22,11 +22,12 @@ Implemented Single Sign-On (SSO) for Voidnet using JWT-based authentication with
 - Validates token issuer (`accounts.openvoidnet.com`)
 - Returns null on invalid tokens (no fallbacks)
 
-#### Middleware (`middleware.ts`)
+#### Proxy (`proxy.ts`)
 - Runtime: Node.js (required for JWT verification with Node.js crypto module)
 - Protected paths: `/console` and any path starting with `/console/`
 - Redirects unauthenticated users to VoidAuth with full return URL
 - Sets user headers (X-User-Id, X-Session-Id) for authenticated requests
+- Note: Next.js 16 uses `proxy.ts` instead of `middleware.ts`
 
 #### Authentication Status API (`app/api/auth/status/route.ts`)
 - Server-side endpoint to check authentication status
@@ -135,7 +136,7 @@ All services must be on subdomains of `openvoidnet.com`:
 ## Future Extensions
 
 ### Adding More Protected Pages
-Add paths to the `protectedPaths` array in `middleware.ts`:
+Add paths to the `protectedPaths` array in `proxy.ts`:
 ```typescript
 const protectedPaths = ['/console', '/dashboard', '/settings'];
 ```
@@ -149,7 +150,7 @@ Any service on `*.openvoidnet.com` can use the same SSO by:
 
 ## Notes
 
-- Middleware deprecation warning is expected (Next.js 16 recommendation)
+- Next.js 16 uses `proxy.ts` instead of `middleware.ts` for authentication
 - Font extraction to separate file prevents "use client" metadata export errors
 - All components follow strict server/client component separation
 - No assumptions or placeholders in code

@@ -36,7 +36,7 @@ publisher: [
 ```
 
 ### 3. Add Protection (if needed)
-Edit `middleware.ts`:
+Edit `proxy.ts`:
 ```typescript
 const developerRequiredPaths = ['/console/analytics', '/console/keys', '/console/page-name'];
 ```
@@ -50,7 +50,7 @@ const developerRequiredPaths = ['/console/analytics', '/console/keys', '/console
 
 ## Key Files
 
-- `middleware.ts` - Authentication and developer enrollment checks
+- `proxy.ts` - Authentication and developer enrollment checks (Next.js 16 convention)
 - `components/app-sidebar.tsx` - Sidebar navigation
 - `lib/jwt.ts` - JWT verification (matches VoidAuth)
 - `app/console/layout.tsx` - Console layout with sidebar
