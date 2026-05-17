@@ -16,7 +16,8 @@ import {
   ThumbsUp,
   Keyboard,
   Sparkles,
-  Home} from "lucide-react"
+  Home,
+  Activity} from "lucide-react"
 
 import { SidebarMenus } from "@/components/console/sidebar-menus"
 import {
@@ -74,12 +75,22 @@ const data = {
   ],
   publisher: [
     {
+      name: "Analytics",
+      url: "/console/analytics",
+      icon: <BarChart />,
+    },
+    {
       name: "Publish Apps",
       url: "/console/publish-apps",
       icon: <Store />,
     },
   ],
   buyer: [
+    {
+      name: "Usage",
+      url: "/console/usage",
+      icon: <Activity />,
+    },
     {
       name: "API Keys",
       url: "/console/keys",

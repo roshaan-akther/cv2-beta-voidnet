@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { helveticaNeue } from "@/lib/fonts";
+import { RolloutHeader } from "@/components/rollout-header";
 
 const geistHeading = Geist({subsets:['latin'],variable:'--font-heading'});
 
@@ -51,7 +52,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <RolloutHeader />
+            {children}
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
